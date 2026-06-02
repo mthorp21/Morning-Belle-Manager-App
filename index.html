@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Belle | Manager Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --mb-green: #99C961;
+    --mb-yellow: #ffde5c;
+    --mb-coral: #fc826d;
+    --mb-teal: #3c5c68;
+    --mb-charcoal: #4d4d4d;
+    --mb-amber: #fbaf41;
+    --mb-sage: #9bc4bc;
+    --mb-burnt: #d57136;
+    --mb-orange: #f46e3b;
+    --mb-green-light: #eef7e4;
+    --mb-teal-light: #e8f2f4;
+    --mb-coral-light: #fef0ed;
+    --mb-bg: #f5f3ef;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--mb-bg);
+    color: var(--mb-charcoal);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .site-header {
+    background: var(--mb-teal);
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    box-shadow: 0 2px 12px rgba(60,92,104,0.18);
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    height: 60px;
+  }
+  .header-logo { font-size: 2rem; flex-shrink: 0; }
+  .header-text { flex: 1; }
+  .header-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .header-sub {
+    font-size: 10px;
+    color: rgba(255,255,255,0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: 1px;
+  }
+  .rainbow-bar {
+    height: 4px;
+    background: linear-gradient(90deg,
+      var(--mb-green) 0%, var(--mb-green) 16.6%,
+      var(--mb-yellow) 16.6%, var(--mb-yellow) 33.3%,
+      var(--mb-amber) 33.3%, var(--mb-amber) 50%,
+      var(--mb-coral) 50%, var(--mb-coral) 66.6%,
+      var(--mb-orange) 66.6%, var(--mb-orange) 83.3%,
+      var(--mb-teal) 83.3%, var(--mb-teal) 100%
+    );
+  }
+
+  /* MAIN WRAP */
+  .page-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+  }
+
+  /* HERO */
+  .hub-hero {
+    background: var(--mb-teal);
+    border-radius: 16px;
+    padding: 2rem 2rem 1.75rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hub-hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(153,201,97,0.12);
+  }
+  .hub-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: -30px;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: rgba(255,222,92,0.08);
+  }
+  .hero-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--mb-green);
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3vw, 30px);
+    color: #fff;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.6;
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--mb-teal);
+    margin-bottom: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  /* TOOL CARDS GRID */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .tool-card {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,0.07);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+  .tool-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.11);
+  }
+  .tool-card-header {
+    padding: 1.25rem 1.25rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .tool-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .tool-icon.green  { background: var(--mb-green-light); }
+  .tool-icon.teal   { background: var(--mb-teal-light); }
+  .tool-icon.coral  { background: var(--mb-coral-light); }
+  .tool-icon.amber  { background: #fef6e6; }
+  .tool-icon.sage   { background: #eef5f4; }
+
+  .tool-meta { flex: 1; }
+  .tool-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--mb-teal);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .tool-desc {
+    font-size: 12px;
+    color: var(--mb-charcoal);
+    opacity: 0.75;
+    line-height: 1.55;
+  }
+  .tool-card-footer {
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .tool-tag {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 100px;
+  }
+  .tool-tag.green  { background: var(--mb-green-light); color: #3a6e1a; }
+  .tool-tag.teal   { background: var(--mb-teal-light); color: var(--mb-teal); }
+  .tool-tag.coral  { background: var(--mb-coral-light); color: #c0442e; }
+  .tool-tag.amber  { background: #fef6e6; color: #8a5a00; }
+  .tool-tag.sage   { background: #eef5f4; color: #3a6060; }
+
+  .tool-arrow {
+    font-size: 14px;
+    color: rgba(0,0,0,0.3);
+    transition: color 0.2s, transform 0.2s;
+  }
+  .tool-card:hover .tool-arrow {
+    color: var(--mb-teal);
+    transform: translateX(3px);
+  }
+
+  /* EXTERNAL LINK CARD */
+  .ext-card {
+    background: var(--mb-teal);
+    border-radius: 14px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    transition: opacity 0.18s, transform 0.18s;
+    margin-bottom: 2rem;
+  }
+  .ext-card:hover { opacity: 0.92; transform: translateY(-2px); }
+  .ext-icon {
+    width: 54px;
+    height: 54px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+  .ext-text { flex: 1; }
+  .ext-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  .ext-desc { font-size: 12px; opacity: 0.75; line-height: 1.5; }
+  .ext-badge {
+    background: var(--mb-green);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 5px 12px;
+    border-radius: 100px;
+    flex-shrink: 0;
+  }
+
+  /* COLLECTIVE GENIUS PANEL */
+  .cg-panel {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,0.07);
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  .cg-header {
+    background: linear-gradient(135deg, #f7f1e8, #fff3d6);
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .cg-icon-wrap {
+    width: 54px;
+    height: 54px;
+    background: var(--mb-amber);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+  .cg-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--mb-teal);
+    margin-bottom: 4px;
+  }
+  .cg-subtitle {
+    font-size: 12px;
+    color: var(--mb-charcoal);
+    opacity: 0.7;
+    line-height: 1.55;
+  }
+  .cg-body { padding: 1.5rem; }
+  .cg-message {
+    background: var(--mb-bg);
+    border-left: 3px solid var(--mb-amber);
+    border-radius: 0 10px 10px 0;
+    padding: 1rem 1.25rem;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--mb-charcoal);
+    margin-bottom: 1.25rem;
+    font-style: italic;
+  }
+  .cg-message .sig {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--mb-teal);
+    display: block;
+    margin-top: 0.5rem;
+  }
+  .cg-step {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--mb-amber);
+    margin-bottom: 1rem;
+  }
+  .cg-contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+  }
+  .cg-contact {
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .cg-contact.shelby  { background: linear-gradient(135deg, #fef0e8, #fff); }
+  .cg-contact.erica   { background: linear-gradient(135deg, #e8f2f4, #fff); }
+  .cg-contact.caitie  { background: linear-gradient(135deg, #eef7e4, #fff); }
+  .cg-contact.wes     { background: linear-gradient(135deg, #e8effa, #fff); }
+  .cg-contact.mike    { background: linear-gradient(135deg, var(--mb-green-light), #fff); }
+
+  .cg-contact-name {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--mb-teal);
+  }
+  .cg-contact-role {
+    font-size: 11px;
+    color: var(--mb-charcoal);
+    opacity: 0.75;
+  }
+  .cg-form-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    padding: 6px 12px;
+    border-radius: 100px;
+    background: var(--mb-teal);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .cg-form-link:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* FOOTER */
+  .hub-footer {
+    text-align: center;
+    padding: 2rem 0 1rem;
+    font-size: 11px;
+    color: rgba(0,0,0,0.35);
+    border-top: 1px solid rgba(0,0,0,0.07);
+  }
+  .hub-footer strong { color: var(--mb-teal); }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .tools-grid { grid-template-columns: 1fr; }
+    .cg-contacts-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-logo">🌱</div>
+    <div class="header-text">
+      <div class="header-name">Morning Belle</div>
+      <div class="header-sub">Manager Hub &nbsp;|&nbsp; Insanely Brunch, Insanely Simple</div>
+    </div>
+  </div>
+  <div class="rainbow-bar"></div>
+</header>
+
+<!-- MAIN -->
+<div class="page-wrap">
+
+  <!-- HERO -->
+  <div class="hub-hero">
+    <div class="hero-eyebrow">🌱 Your One-Stop Manager Resource</div>
+    <h1 class="hero-headline">Everything you need, right here.</h1>
+    <p class="hero-sub">Brand, training, guest recovery, Inspire, and the Collective Genius feedback system — all in one place. Open any resource below to get started.</p>
+  </div>
+
+  <!-- TOOLS -->
+  <div class="section-label">Training &amp; Reference Tools</div>
+  <div class="tools-grid">
+
+    <!-- Gardener's Guide / Brand App -->
+    <a class="tool-card" href="Morning_Belle_Brand_App.html" target="_blank">
+      <div class="tool-card-header">
+        <div class="tool-icon green">📗</div>
+        <div class="tool-meta">
+          <div class="tool-name">Gardener's Guide</div>
+          <div class="tool-desc">Brand pillars, service standards, Uncommon Hospitality, and the Morning Belle story. The foundation for every Gardener.</div>
+        </div>
+      </div>
+      <div class="tool-card-footer">
+        <span class="tool-tag green">Brand &amp; Standards</span>
+        <span class="tool-arrow">→</span>
+      </div>
+    </a>
+
+    <!-- Manager Accountability Training -->
+    <a class="tool-card" href="MB_Manager_Accountability_Training.html" target="_blank">
+      <div class="tool-card-header">
+        <div class="tool-icon teal">📋</div>
+        <div class="tool-meta">
+          <div class="tool-name">Manager Accountability Training</div>
+          <div class="tool-desc">Constant Gentle Pressure, below-the-line behaviors, and the accountability frameworks that keep the team moving forward.</div>
+        </div>
+      </div>
+      <div class="tool-card-footer">
+        <span class="tool-tag teal">Leadership</span>
+        <span class="tool-arrow">→</span>
+      </div>
+    </a>
+
+    <!-- Guest Recovery Training -->
+    <a class="tool-card" href="MB_Guest_Recovery_Training.html" target="_blank">
+      <div class="tool-card-header">
+        <div class="tool-icon coral">🤝</div>
+        <div class="tool-meta">
+          <div class="tool-name">Guest Recovery Training</div>
+          <div class="tool-desc">Scripts, frameworks, and real-world scenarios for turning a tough guest experience into a loyal return visit.</div>
+        </div>
+      </div>
+      <div class="tool-card-footer">
+        <span class="tool-tag coral">Guest Experience</span>
+        <span class="tool-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- INSPIRE EXTERNAL LINK -->
+  <div class="section-label">Meritage Resources</div>
+  <a class="ext-card" href="https://inspire.mhgi.net/index.php?page=contact-us-list#" target="_blank">
+    <div class="ext-icon">🏢</div>
+    <div class="ext-text">
+      <div class="ext-name">Inspire — MHGI Resource Portal</div>
+      <div class="ext-desc">HR, Operations, Finance, and corporate contacts. Everything you need from the Meritage home office — one link, every resource.</div>
+    </div>
+    <div class="ext-badge">Open Inspire ↗</div>
+  </a>
+
+  <!-- COLLECTIVE GENIUS -->
+  <div class="section-label">Team Voice</div>
+  <div class="cg-panel">
+    <div class="cg-header">
+      <div class="cg-icon-wrap">💡</div>
+      <div>
+        <div class="cg-title">Collective Genius</div>
+        <div class="cg-subtitle">The best ideas are already in the room. Scan the code for whoever can do something about it — it goes straight to that person, not into a void.</div>
+      </div>
+    </div>
+    <div class="cg-body">
+      <div class="cg-message">
+        Restaurants are loud, fast, and full of small decisions — the people closest to the guest see things none of us can. That's the whole point. Our restaurants only work because of the brilliant people in them, every shift, every station, every day. We call it <strong>Collective Genius</strong> for a reason. None of us, not me, not any single manager, is going to out-think a restaurant full of cooks, bartenders, servers, and hosts who are living the work in real time. You notice the thing that's off. You have the idea the rest of us haven't had yet. So I'm asking, plainly: tell us. The good, the broken, the half-baked, the thing you almost didn't bother mentioning.
+        <span class="sig">— Mike</span>
+      </div>
+
+      <div class="cg-step">1 Scan &nbsp;&nbsp; 2 Share &nbsp;&nbsp; 3 We Listen</div>
+      <p style="font-size:12px;color:var(--mb-charcoal);opacity:.7;margin-bottom:1rem;line-height:1.6;">Pick whoever fits the topic. Anything you send goes directly to that person.</p>
+
+      <div class="cg-contacts-grid">
+        <div class="cg-contact shelby">
+          <div class="cg-contact-name">Shelby</div>
+          <div class="cg-contact-role">Ops, Feedback, Concerns, Ideas</div>
+          <a class="cg-form-link" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=JtvOzgtap0a9DLHTx5DUFiuR6FlSA0hMvCnvI8S0CoVUNDZETE9INEhOS0U5NUNNN0dDTEM5V0xFTC4u" target="_blank">Send ideas or feedback ↗</a>
+        </div>
+        <div class="cg-contact erica">
+          <div class="cg-contact-name">Erica</div>
+          <div class="cg-contact-role">Training &amp; Systems</div>
+          <a class="cg-form-link" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=JtvOzgtap0a9DLHTx5DUFiuR6FlSA0hMvCnvI8S0CoVUNEhHUTFDUjhXUlBIQkZSTU1XNUswVklQMC4u" target="_blank">Send ideas or feedback ↗</a>
+        </div>
+        <div class="cg-contact caitie">
+          <div class="cg-contact-name">Caitie</div>
+          <div class="cg-contact-role">Marketing, Ideas, Events, Community</div>
+          <a class="cg-form-link" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=JtvOzgtap0a9DLHTx5DUFiuR6FlSA0hMvCnvI8S0CoVUREtGSERVSEZPSk42WE5WN1ZSMzVEVFNXUy4u" target="_blank">Send ideas or feedback ↗</a>
+        </div>
+        <div class="cg-contact wes">
+          <div class="cg-contact-name">Wes</div>
+          <div class="cg-contact-role">Culinary, Beverage, Supplies, Equipment</div>
+          <a class="cg-form-link" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=JtvOzgtap0a9DLHTx5DUFiuR6FlSA0hMvCnvI8S0CoVUQzdKNkVPTlQ3Q0dVS0JLNE5CWlkyU1BTVS4u" target="_blank">Send ideas or feedback ↗</a>
+        </div>
+        <div class="cg-contact mike">
+          <div class="cg-contact-name">Mike</div>
+          <div class="cg-contact-role">Ideas for Collective Genius</div>
+          <a class="cg-form-link" href="https://forms.cloud.microsoft/r/XHqbWbBhP6" target="_blank">Send ideas or feedback ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page-wrap -->
+
+<!-- FOOTER -->
+<div class="page-wrap" style="padding-top:0;">
+  <div class="hub-footer">
+    <strong>Morning Belle</strong> &nbsp;|&nbsp; Manager Hub &nbsp;|&nbsp; For internal use only &nbsp;|&nbsp; 🌱
+  </div>
+</div>
+
+</body>
+</html>
